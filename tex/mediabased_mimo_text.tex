@@ -1,3 +1,4 @@
+%!TEX root = ../main.tex
 
 \begin{abstract}
 
@@ -135,7 +136,7 @@ Note that the performance shown in Figure \ref{MIMOvsSIMO} is over a single tran
 \begin{figure}[t]
 \centering
 \hspace{1mm}
-\includegraphics[width = 9.4cm, height = 7cm, trim = 6.5mm 0 -3mm 0 ]{./fig/MIMOvsSIMO2}
+\includegraphics[scale = 1.02, trim = 6.5mm 0 -3mm 0 ]{./fig/MIMOvsSIMO2}
 \caption{Performance of the 2$\times$8  LMIMO-MBM (2 RF mirrors are used in each transmit unit) vs. 1$\times$8 SIMO-MBM  (4 RF mirrors are used in a single transmit unit), $R = 16$ bits per channel-use for a single transmission in time (without any FEC). Note that at the cost of small degradation in performance and increasing the number of transmit units from one to two, the $2 \times 8$ LMIMO-MBM offers reduced complexity in each RF structure  and reduction in algorithmic complexity for training, detection and tracking.}
 \label{MIMOvsSIMO}
 \end{figure}
@@ -190,7 +191,7 @@ The performance can be further improved by using multiple (i.e $P>1$) points for
 \hspace{-1cm}
 \vspace{0cm}
 
-{\includegraphics[height = 6.6cm, width = 9cm, trim = 6cm 9.6cm 6cm 10cm ]{./fig/algorithm_performance}}
+{\includegraphics[height = 9 cm, width = 12cm, trim = 6cm 9.6cm 6cm 10cm ]{./fig/algorithm_performance}}
 \caption{Performance of 4$\times$16 MIMO-MBM for a single transmission (without any FEC), $R = 32$ bits per channel-use, detection is performed using Algorithm \ref{pseudocode} considering different permutations of transmit units with $ P = 128, T =2$.}
 \label{algorithmPerformance}
 \end{figure}
@@ -232,6 +233,39 @@ where $E$ is the signal energy corresponding to each transmit unit.
 
 Figure \ref{algorithmPerformance} shows the SER performance for $ 4\times 16$ LMIMO-MBM, over a static Rayleigh fading channel with AWGN, transmitting $32$ bits of raw data per channel use. Detection is concluded after two iterations (over $4$ transmit units), using $P = 128$ candidate points and considering different permutations of transmit units.
 
+\begin{figure}[t]
+\centering
+%\hspace{-1cm}
+\vspace{0cm}
+
+{\includegraphics[scale = 0.50]{./fig/spc_vs_uncoded}}
+\caption{Performance of 4$\times$16  MIMO-MBM, uncoded vs.  SPC code with $(n, k, d) = (6, 5, 2)$.}
+
+\label{SPC_vs_uncoded}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+%\hspace{-1cm}
+\vspace{-1cm}
+
+{\includegraphics[scale = 0.50 ]{./fig/mbm_coded}}
+\caption{Performance of 4$\times$16 MIMO-MBM with Reed-Solomon codes.}
+
+\label{RS_all}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+%\hspace{-1cm}
+\vspace{-1cm}
+
+{\includegraphics[scale = 0.55,  trim = 0cm 0cm 0cm 0cm]{./fig/ser_vs_fer_RS}}
+\caption{ Frame Error Rate vs. Symbol Error Rate performance of 4$\times$16 MIMO-MBM with Reed-Solomon codes.}
+
+\label{ser_vs_fer}
+\end{figure}
+
 \section{Application of Forward Error Correction Codes}
 
 
@@ -239,35 +273,23 @@ In the application of Forward Error Correction (FEC) to MBM, it is beneficial to
 
 
 \begin{equation}
-\sum_n BLABLA_i=0 mod THE SIZE (i guess it would be 2^R)
+\sum_{i = 1}^{n}  M_i   \equiv 0 \mod 2^R
 \end{equation}
 
 
 It is straightforward to show that by applying such a coding scheme, the slope of the error rate vs. SNR will asymptotically increase by a factor of $d_{min}$, where $d_{min}$ is the minimum distance of the original binary code. This occurs as the spacing between pairs of points, namely $A-B$ for points $A$ and $B$, in MBM is a Gaussian random variable, and for three points $A,B,C$, $A-B$ is independent of $A-C$.
-Consequently, application of FEC will realize an effect similar to ``diversity over time” with a diversity order determined by $d_{min}$. The corresponding compromise in effective rate is determined by the rate of the underlying binary
+Consequently, application of FEC will realize an effect similar to ``diversity over time" with a diversity order determined by $d_{min}$. The corresponding compromise in effective rate is determined by the rate of the underlying binary
  code. Note that conventional binary codes are designed to achieve the best possible tradeoff between $d_{min}$ and effective rate, i.e., have a large $d_{min}$ for a given rate. As a result, by applying good known binary codes to MBM through generalization
  of parity equations mentioned above, the resulting error performance will enjoy the best achievable asymptotic slope.
 
 
-Figure ?? shows this effect for an SPC with $(n,k,d)=(6,5,2)$.
+Figure \ref{SPC_vs_uncoded} shows this effect for an SPC with $(n,k,d)=(6,5,2)$.
 
 
-Figure ?? shows the performance in the application of Reed-Solomon (RS) codes with symbols corresponding to MBM constellation points.
+Figure \ref{RS_all} shows the performance in the application of Reed-Solomon (RS) codes with symbols corresponding to MBM constellation points. Figure \ref{ser_vs_fer} shows the Frame Error Rate vs. Symbol Error Rate performance of such Reed-Solomon codes.
 
 
 Note that, unlike random-like codes such as Turbo-code and Low Density Parity (LDPC) codes which typically suffer from error floor, the slope of the error curve in coded MBM will not change as SNR increases.
-
-
-\begin{figure}[t]
-\centering
-%\hspace{-1cm}
-\vspace{-1cm}
-
-{\includegraphics[scale = 0.65,  trim = 3cm 5cm 3cm 5cm]{./fig/MBM_coded}}
-\caption{Performance of 4$\times$16 MIMO-MBM with  FEC applied.}
-
-\label{coded}
-\end{figure}
 
 
 \section {Pulse Shaping, Equalization and Decision Feedback at the Receiver}
